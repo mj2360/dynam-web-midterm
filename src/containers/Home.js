@@ -5,6 +5,7 @@ function Home() {
     let initialWord = "hello"
     const [word, setWord] = useState(initialWord);
     const[wordData, setWordData] = useState(); 
+
     useEffect(() => {
         if(word) {
            axios.get(
@@ -19,6 +20,7 @@ function Home() {
            });
         }
        }, [word]); 
+       
     return (
       <>
         Word: {word}
