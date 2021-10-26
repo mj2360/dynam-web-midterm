@@ -5,6 +5,7 @@ import Display from '../components/Display';
 
 function Home() {
   const[wordData, setWordData] = useState(); 
+  const[gif, setGifData] = useState(); 
 
   function changeWord(e) {
     e.preventDefault(); 
@@ -12,15 +13,20 @@ function Home() {
     const wordInput = e.currentTarget.word.value 
     console.log(wordInput);
 
-    const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${wordInput}`
-    axios.get(url)
+    const url_1 = `https://api.dictionaryapi.dev/api/v2/entries/en/${wordInput}`
+    const url_2 = `http://api.giphy.com/v1/gifs/translate?s=${wordInput}&api_key=k364FjEl3SMVa01bo63nZWqlaTDQdQTN&weirdness=9`
+    axios.get(url_1)
     .then(function (response) {
       setWordData(response.data);
+      return axios.get(url_2)
+    })
+    .then(function (response) {
+      setGifData(response.data);
+      console.log(response.data)
     })
     .catch(function (error) {
       console.warn(error);
     });
-
     }
 
     const { 
@@ -38,9 +44,6 @@ function Home() {
       }
     }, [wordData])
 
-   // console.log(wordData[0].meanings[0].definitions); 
-
-       
     return (
       <>
         <form onSubmit={(e) => changeWord(e)}>
