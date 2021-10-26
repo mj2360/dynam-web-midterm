@@ -4,6 +4,7 @@ function Display ({
     aWord, 
     pos, 
     definition, 
+    gifUrl,
 }) {
     return(
         <section className="displayBox">
@@ -15,6 +16,11 @@ function Display ({
                 <p className="POS">
                     <strong>{pos}</strong>
                 </p>
+
+                //issue displaying image
+                <div>
+                    <img src={gifUrl} alt="" />
+                </div>
 
                 {/* <p className="definition">
                     <strong>{definition}</strong>

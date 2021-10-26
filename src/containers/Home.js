@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useMemo} from 'react'; 
+import React, { useState, useMemo} from 'react'; 
 import axios from 'axios'; 
 import Display from '../components/Display'; 
 
@@ -22,7 +22,6 @@ function Home() {
     })
     .then(function (response) {
       setGifData(response.data);
-      console.log(response.data)
     })
     .catch(function (error) {
       console.warn(error);
@@ -44,6 +43,15 @@ function Home() {
       }
     }, [wordData])
 
+    const gifItem = useMemo(() => {
+      if (!gif) return{};
+  
+      return{ gifItem: gif.data.url }
+    }, [gif])
+
+    const gifUrl = gifItem.gifItem; 
+    //console.log(gifUrl);
+
     return (
       <>
         <form onSubmit={(e) => changeWord(e)}>
@@ -55,6 +63,7 @@ function Home() {
           aWord={aWord}
           pos={pos}
           definition={definition}
+          gifUrl={gifUrl}
         /> 
 
       </>
